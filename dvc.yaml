@@ -1,0 +1,11 @@
+stages:
+  read_raw_data:
+    cmd: python src/dvc_scripts/read_raw_data.py
+    deps:
+    - ./src/data/read_raw_data.py
+    - ./src/dvc_scripts/read_raw_data.py
+    params:
+    - read_raw_data.end_id
+    - read_raw_data.start_id
+    outs:
+    - ./data/raw/raw_data.pkl

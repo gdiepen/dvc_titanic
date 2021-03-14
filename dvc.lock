@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  read_raw_data:
+    cmd: python src/dvc_scripts/read_raw_data.py
+    deps:
+    - path: ./src/data/read_raw_data.py
+      md5: fdd8c01a23d960e2a637dbb126fbc5a3
+      size: 466
+    - path: ./src/dvc_scripts/read_raw_data.py
+      md5: 3e71e340450fe1f59898615ffcceb877
+      size: 1726
+    params:
+      params.yaml:
+        read_raw_data.end_id: 891
+        read_raw_data.start_id: 1
+    outs:
+    - path: ./data/raw/raw_data.pkl
+      md5: 208352910640c8028970351760b0f187
+      size: 108541
