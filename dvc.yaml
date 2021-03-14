@@ -9,3 +9,16 @@ stages:
     - read_raw_data.start_id
     outs:
     - ./data/raw/raw_data.pkl
+  train_test_split:
+    cmd: python src/dvc_scripts/train_test_split.py --raw-input-file ./data/raw/raw_data.pkl
+      --train-output-file ./data/train_test_split/train.pkl --test-output-file ./data/train_test_split/test.pkl
+    deps:
+    - ./data/raw/raw_data.pkl
+    - ./src/dvc_scripts/read_raw_data.py
+    - ./src/train_test_split/train_test_split.py
+    params:
+    - train_test_split.random_state
+    - train_test_split.test_size
+    outs:
+    - ./data/train_test_split/test.pkl
+    - ./data/train_test_split/train.pkl

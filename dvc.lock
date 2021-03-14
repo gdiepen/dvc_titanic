@@ -17,3 +17,27 @@ stages:
     - path: ./data/raw/raw_data.pkl
       md5: 208352910640c8028970351760b0f187
       size: 108541
+  train_test_split:
+    cmd: python src/dvc_scripts/train_test_split.py --raw-input-file ./data/raw/raw_data.pkl
+      --train-output-file ./data/train_test_split/train.pkl --test-output-file ./data/train_test_split/test.pkl
+    deps:
+    - path: ./data/raw/raw_data.pkl
+      md5: 208352910640c8028970351760b0f187
+      size: 108541
+    - path: ./src/dvc_scripts/read_raw_data.py
+      md5: a19811083c05354d0274cc70f5b88e2d
+      size: 1842
+    - path: ./src/train_test_split/train_test_split.py
+      md5: 248735a357396c9d8b88f7f1a1b31b72
+      size: 757
+    params:
+      params.yaml:
+        train_test_split.random_state: 42
+        train_test_split.test_size: 0.2
+    outs:
+    - path: ./data/train_test_split/test.pkl
+      md5: 918a7af7499c0303c9baf2362fde4a43
+      size: 22996
+    - path: ./data/train_test_split/train.pkl
+      md5: 1169ef44c3b2bc593107eaaf39e8d65d
+      size: 87104
