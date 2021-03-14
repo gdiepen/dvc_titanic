@@ -1,0 +1,9 @@
+read_raw_data:
+  start_id: 1
+  end_id: 891
+
+
+train_test_split:
+  random_state: 42
+  test_size: 0.2
+
