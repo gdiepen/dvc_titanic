@@ -1,6 +1,6 @@
 stages:
   read_raw_data:
-    cmd: python src/dvc_scripts/read_raw_data.py
+    cmd: python src/dvc_scripts/read_raw_data.py --output-file ./data/raw/raw_data.pkl
     deps:
     - ./src/data/read_raw_data.py
     - ./src/dvc_scripts/read_raw_data.py

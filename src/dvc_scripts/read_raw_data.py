@@ -31,6 +31,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--start_id", metavar="ID", type=int, help="Minimum pax-id to be read")
     parser.add_argument("--end_id", metavar="ID", type=int, help="Maximum pax-id to be read")
+    parser.add_argument("--output-file", metavar="file", type=str, required=True, help="Maximum pax-id to be read")
 
     args = parser.parse_args()
 
