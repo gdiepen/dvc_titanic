@@ -46,8 +46,6 @@ stages:
     - ./dvc_scripts/basic_logistic_regression.py
     - ./src/models/basic_logistic_regression.py
     - ./models/basic_logistic_regression/model.pkl
-    params:
-    - model.basic_logistic_regression
     metrics:
     - ./metrics/basic_logistic_regression/test.json:
         cache: false

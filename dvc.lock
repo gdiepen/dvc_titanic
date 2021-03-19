@@ -57,12 +57,13 @@ stages:
       size: 2235
     params:
       params.yaml:
-        model.basic_logistic_regression.classifier_settings:
-          numerical_impute_strategy: median
-          categorical_impute_strategy: most_frequent
-        model.basic_logistic_regression.features:
-        - Age
-        - Pclass
+        model.basic_logistic_regression:
+          features:
+          - Age
+          - Pclass
+          classifier_settings:
+            numerical_impute_strategy: median
+            categorical_impute_strategy: most_frequent
     outs:
     - path: ./metrics/basic_logistic_regression/train.json
       md5: 4d82772c2639101c631f075adff9e9db
