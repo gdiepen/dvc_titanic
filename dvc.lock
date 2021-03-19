@@ -70,3 +70,23 @@ stages:
     - path: ./models/basic_logistic_regression/model.pkl
       md5: 826366cdd5da79f2f2923014cca87c0a
       size: 2596
+  evaluate_basic_logistic_regression:
+    cmd: python ./dvc_scripts/basic_logistic_regression.py --evaluate-test-set ./models/basic_logistic_regression/model.pkl
+      ./data/train_test_split/test.pkl --metrics-output-file metrics/basic_logistic_regression/test.json
+    deps:
+    - path: ./data/train_test_split/test.pkl
+      md5: 918a7af7499c0303c9baf2362fde4a43
+      size: 22996
+    - path: ./dvc_scripts/basic_logistic_regression.py
+      md5: 6664b8a52120ff66b17263378447fd4f
+      size: 4496
+    - path: ./models/basic_logistic_regression/model.pkl
+      md5: 826366cdd5da79f2f2923014cca87c0a
+      size: 2596
+    - path: ./src/models/basic_logistic_regression.py
+      md5: a601a96aef4a8a69a298fd60a507c377
+      size: 2235
+    outs:
+    - path: ./metrics/basic_logistic_regression/test.json
+      md5: d85ecfd198d0b8fc114f1142b3f2c7d1
+      size: 144
