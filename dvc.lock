@@ -41,3 +41,32 @@ stages:
     - path: ./data/train_test_split/train.pkl
       md5: 1169ef44c3b2bc593107eaaf39e8d65d
       size: 87104
+  train_basic_logistic_regression:
+    cmd: python ./dvc_scripts/basic_logistic_regression.py --train-input-file ./data/train_test_split/train.pkl
+      --model-output-file models/basic_logistic_regression/model.pkl --metrics-output-file
+      metrics/basic_logistic_regression/train.json
+    deps:
+    - path: ./data/train_test_split/train.pkl
+      md5: 1169ef44c3b2bc593107eaaf39e8d65d
+      size: 87104
+    - path: ./dvc_scripts/basic_logistic_regression.py
+      md5: ce0ee988978b9edb03f81da4f3489031
+      size: 4499
+    - path: ./src/models/basic_logistic_regression.py
+      md5: f6f3894abd76298b7c0839c825193e0b
+      size: 2236
+    params:
+      params.yaml:
+        model.basic_logistic_regression.classifier_settings:
+          numerical_impute_strategy: median
+          categorical_impute_strategy: most_frequent
+        model.basic_logistic_regression.features:
+        - Age
+        - Pclass
+    outs:
+    - path: ./metrics/basic_logistic_regression/train.json
+      md5: 4d82772c2639101c631f075adff9e9db
+      size: 144
+    - path: ./models/basic_logistic_regression/model.pkl
+      md5: 826366cdd5da79f2f2923014cca87c0a
+      size: 2596

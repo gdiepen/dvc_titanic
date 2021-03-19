@@ -22,3 +22,19 @@ stages:
     outs:
     - ./data/train_test_split/test.pkl
     - ./data/train_test_split/train.pkl
+  train_basic_logistic_regression:
+    cmd: python ./dvc_scripts/basic_logistic_regression.py --train-input-file ./data/train_test_split/train.pkl
+      --model-output-file models/basic_logistic_regression/model.pkl --metrics-output-file
+      metrics/basic_logistic_regression/train.json
+    deps:
+    - ./data/train_test_split/train.pkl
+    - ./dvc_scripts/basic_logistic_regression.py
+    - ./src/models/basic_logistic_regression.py
+    params:
+    - model.basic_logistic_regression.classifier_settings
+    - model.basic_logistic_regression.features
+    outs:
+    - ./models/basic_logistic_regression/model.pkl
+    metrics:
+    - ./metrics/basic_logistic_regression/train.json:
+        cache: false
