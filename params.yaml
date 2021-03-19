@@ -7,3 +7,11 @@ train_test_split:
   random_state: 42
   test_size: 0.2
 
+model:
+  basic_logistic_regression:
+    features:
+    - Age
+    - Pclass
+    classifier_settings:
+      numerical_impute_strategy: "median"
+      categorical_impute_strategy: "most_frequent"
