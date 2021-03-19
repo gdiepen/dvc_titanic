@@ -4,11 +4,11 @@ stages:
     cmd: python dvc_scripts/read_raw_data.py --output-file ./data/raw/raw_data.pkl
     deps:
     - path: ./dvc_scripts/read_raw_data.py
-      md5: cc8b9574dfaa3192d1e3b6643052f13b
-      size: 1815
+      md5: 5664e84dd88e1956e4df9be2b58a3cf2
+      size: 1888
     - path: ./src/data/read_raw_data.py
-      md5: fdd8c01a23d960e2a637dbb126fbc5a3
-      size: 466
+      md5: 17b076e43c6f5a3d5896b80a5cdfd122
+      size: 465
     params:
       params.yaml:
         read_raw_data.end_id: 891
@@ -25,11 +25,11 @@ stages:
       md5: 208352910640c8028970351760b0f187
       size: 108541
     - path: ./dvc_scripts/read_raw_data.py
-      md5: cc8b9574dfaa3192d1e3b6643052f13b
-      size: 1815
+      md5: 5664e84dd88e1956e4df9be2b58a3cf2
+      size: 1888
     - path: ./src/train_test_split/train_test_split.py
-      md5: 248735a357396c9d8b88f7f1a1b31b72
-      size: 757
+      md5: e9474686d535f93b57f096dfa4019f2b
+      size: 772
     params:
       params.yaml:
         train_test_split.random_state: 42
@@ -50,11 +50,11 @@ stages:
       md5: 1169ef44c3b2bc593107eaaf39e8d65d
       size: 87104
     - path: ./dvc_scripts/basic_logistic_regression.py
-      md5: ce0ee988978b9edb03f81da4f3489031
-      size: 4499
+      md5: 6664b8a52120ff66b17263378447fd4f
+      size: 4496
     - path: ./src/models/basic_logistic_regression.py
-      md5: f6f3894abd76298b7c0839c825193e0b
-      size: 2236
+      md5: a601a96aef4a8a69a298fd60a507c377
+      size: 2235
     params:
       params.yaml:
         model.basic_logistic_regression.classifier_settings:
