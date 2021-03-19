@@ -51,11 +51,11 @@ def main():
     df = get_raw_pax_data(start_id, end_id)
 
     # Now we write it to the place where we expect it with dvc
-    output_location = os.path.dirname(__file__) + "/../../data/raw"
-    os.makedirs(output_location, exist_ok=True)
+    output_location = os.path.dirname(args.output_file)
+    if output_location:
+        os.makedirs(output_location, exist_ok=True)
 
-    df.to_pickle(os.path.dirname(__file__) + "/../../data/raw/raw_data.pkl")
-
+    df.to_pickle(args.output_file)
 
 if __name__ == "__main__":
     main()
