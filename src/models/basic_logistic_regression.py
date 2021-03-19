@@ -1,4 +1,3 @@
-
 """Module holding the functions to read the data from CDP
 At the moment, alternative implementation is to read the train.csv file from disk as
 the permissions for the table are not set up correctly

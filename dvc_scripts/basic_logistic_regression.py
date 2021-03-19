@@ -1,4 +1,3 @@
-
 import os
 import argparse
 import json
@@ -10,6 +9,7 @@ import sys
 import joblib
 
 import sys
+
 sys.path.insert(0, "")
 
 from src.models.basic_logistic_regression import fit_model, get_performance
@@ -145,6 +145,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-

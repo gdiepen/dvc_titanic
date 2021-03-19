@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import sys
 import yaml
+
 # Since we are working in subfolder, make sure we add the main folder to the path
 sys.path.insert(0, "")
 
@@ -27,11 +28,39 @@ def main():
 
     # As fallback, we can always manually provide start/end id here
     parser = argparse.ArgumentParser()
-    parser.add_argument("--raw-input-file", metavar="file", type=str, required=True, help="Name of the train output file")
-    parser.add_argument("--train-output-file", metavar="file", type=str,required=True,  help="Name of the train output file")
-    parser.add_argument("--test-output-file", metavar="file", type=str,required=True,  help="Name of the test output file")
-    parser.add_argument("--random-state", metavar="state", type=int, help="Random State to initialize with")
-    parser.add_argument("--test-size", metavar="percentage", type=float, help="Percentage to assign to test set")
+    parser.add_argument(
+        "--raw-input-file",
+        metavar="file",
+        type=str,
+        required=True,
+        help="Name of the train output file",
+    )
+    parser.add_argument(
+        "--train-output-file",
+        metavar="file",
+        type=str,
+        required=True,
+        help="Name of the train output file",
+    )
+    parser.add_argument(
+        "--test-output-file",
+        metavar="file",
+        type=str,
+        required=True,
+        help="Name of the test output file",
+    )
+    parser.add_argument(
+        "--random-state",
+        metavar="state",
+        type=int,
+        help="Random State to initialize with",
+    )
+    parser.add_argument(
+        "--test-size",
+        metavar="percentage",
+        type=float,
+        help="Percentage to assign to test set",
+    )
 
     args = parser.parse_args()
 
@@ -47,15 +76,12 @@ def main():
         print("ERROR: random_state or test_size missing")
         sys.exit(1)
 
-
     df = pd.read_pickle(args.raw_input_file)
     df_train, df_test = split_input_into_train_test(df, random_state, test_size)
-
 
     df_train.to_pickle(args.train_output_file)
     df_test.to_pickle(args.test_output_file)
 
+
 if __name__ == "__main__":
     main()
-
-

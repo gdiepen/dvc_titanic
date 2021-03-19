@@ -5,11 +5,10 @@ import yaml
 import sys
 
 # Since we are working in subfolder, make sure we add the main folder to the path
-#sys.path.insert(0, os.path.dirname(__file__) + "/../../")
+# sys.path.insert(0, os.path.dirname(__file__) + "/../../")
 sys.path.insert(0, "")
 
 from src.data.read_raw_data import get_raw_pax_data
-
 
 
 def main():
@@ -29,9 +28,19 @@ def main():
 
     # As fallback, we can always manually provide start/end id here
     parser = argparse.ArgumentParser()
-    parser.add_argument("--start_id", metavar="ID", type=int, help="Minimum pax-id to be read")
-    parser.add_argument("--end_id", metavar="ID", type=int, help="Maximum pax-id to be read")
-    parser.add_argument("--output-file", metavar="file", type=str, required=True, help="Maximum pax-id to be read")
+    parser.add_argument(
+        "--start_id", metavar="ID", type=int, help="Minimum pax-id to be read"
+    )
+    parser.add_argument(
+        "--end_id", metavar="ID", type=int, help="Maximum pax-id to be read"
+    )
+    parser.add_argument(
+        "--output-file",
+        metavar="file",
+        type=str,
+        required=True,
+        help="Maximum pax-id to be read",
+    )
 
     args = parser.parse_args()
 
@@ -57,8 +66,6 @@ def main():
 
     df.to_pickle(args.output_file)
 
+
 if __name__ == "__main__":
     main()
-
-
-
