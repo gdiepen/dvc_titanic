@@ -1,20 +1,20 @@
 stages:
   read_raw_data:
-    cmd: python src/dvc_scripts/read_raw_data.py --output-file ./data/raw/raw_data.pkl
+    cmd: python dvc_scripts/read_raw_data.py --output-file ./data/raw/raw_data.pkl
     deps:
     - ./src/data/read_raw_data.py
-    - ./src/dvc_scripts/read_raw_data.py
+    - ./dvc_scripts/read_raw_data.py
     params:
     - read_raw_data.end_id
     - read_raw_data.start_id
     outs:
     - ./data/raw/raw_data.pkl
   train_test_split:
-    cmd: python src/dvc_scripts/train_test_split.py --raw-input-file ./data/raw/raw_data.pkl
+    cmd: python dvc_scripts/train_test_split.py --raw-input-file ./data/raw/raw_data.pkl
       --train-output-file ./data/train_test_split/train.pkl --test-output-file ./data/train_test_split/test.pkl
     deps:
     - ./data/raw/raw_data.pkl
-    - ./src/dvc_scripts/read_raw_data.py
+    - ./dvc_scripts/read_raw_data.py
     - ./src/train_test_split/train_test_split.py
     params:
     - train_test_split.random_state
