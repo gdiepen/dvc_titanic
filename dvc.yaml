@@ -48,3 +48,15 @@ stages:
     metrics:
     - ./metrics/basic_logistic_regression/test.json:
         cache: false
+  train_xgboost_model:
+    cmd: python dvc_scripts/xgboost_model.py --train-input-file ./data/train_test_split/train.pkl
+      --model-output-file ./models/xgboost_model/model.pkl --metrics-output-file metrics/xgboost_model/train.json
+    deps:
+    - ./data/train_test_split/train.pkl
+    - dvc_scripts/xgboost_model.py
+    - src/models/xgboost_model.py
+    outs:
+    - ./models/xgboost_model/model.pkl
+    metrics:
+    - metrics/xgboost_model/train.json:
+        cache: false

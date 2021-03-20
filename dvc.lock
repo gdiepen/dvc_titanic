@@ -119,3 +119,23 @@ stages:
     - path: metrics/basic_logistic_regression/abc.json
       md5: d85ecfd198d0b8fc114f1142b3f2c7d1
       size: 144
+  train_xgboost_model:
+    cmd: python dvc_scripts/xgboost_model.py --train-input-file ./data/train_test_split/train.pkl
+      --model-output-file ./models/xgboost_model/model.pkl --metrics-output-file metrics/xgboost_model/train.json
+    deps:
+    - path: ./data/train_test_split/train.pkl
+      md5: 1169ef44c3b2bc593107eaaf39e8d65d
+      size: 87104
+    - path: dvc_scripts/xgboost_model.py
+      md5: 6d0993cafede3b69c2a28737b2ca3084
+      size: 6628
+    - path: src/models/xgboost_model.py
+      md5: 5f9ba36c5d337394ba04a465de02fffe
+      size: 2213
+    outs:
+    - path: ./models/xgboost_model/model.pkl
+      md5: 4619c72120f7c70824f4f00fc2d692d6
+      size: 71133
+    - path: metrics/xgboost_model/train.json
+      md5: 23214835dcbe853ac1686015422a0b49
+      size: 134
