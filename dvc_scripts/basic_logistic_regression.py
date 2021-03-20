@@ -8,7 +8,6 @@ import yaml
 import sys
 import joblib
 
-import sys
 
 sys.path.insert(0, "")
 
@@ -63,6 +62,14 @@ def main():
         required=True,
         help="Name of file where the metrics will be stored (training or test)",
     )
+    parser.add_argument(
+        "--show-dvc-add-command",
+        action="store_true",
+        help="After the script is done, it will show the command you will need to use for adding stage",
+    )
+
+
+
 
     args = parser.parse_args()
 
@@ -85,6 +92,7 @@ def main():
         if (args.model_output_file is None) and (args.train_input_file is None):
             print("ERROR: Please provide both model-output-file and train-input-file")
             sys.exit(1)
+
 
     # Now all checking is done, we can continue with the actual calling of the
     # underlying functions
@@ -112,6 +120,33 @@ def main():
         print("Metrics on provided dataset:")
         pprint.pprint(metrics)
 
+        if args.show_dvc_add_command:
+            print()
+            print()
+            print("Please copy paste the items below AFTER your")
+            print("    dvc run -n STAGE_NAME \\")
+            print("command")
+            print()
+            cmdline = f"  -d {sys.argv[0]} \\\n"
+            cmdline += f"  -d {args.evaluate_test_set[0]} \\\n"
+            cmdline += f"  -d {args.evaluate_test_set[1]} \\\n"
+            cmdline += f"  -d {os.path.relpath(fit_model.__globals__['__file__'], '.')} \\\n"
+            cmdline += f"  \\\n"
+            if args.metrics_output_file:
+                cmdline += f"  -M {args.metrics_output_file} \\\n"
+
+            all_args = [x for x in sys.argv if x != "--show-dvc-add-command"]
+            all_args = map(lambda x: f"\\\n    {x}" if x[0] == "-" else x, all_args)
+
+
+            cmdline += "  python " + " ".join(all_args) 
+            
+
+            print(cmdline)
+            print()
+            print()
+
+
     elif args.model_output_file is not None:
         print("Fitting model")
 
@@ -138,6 +173,38 @@ def main():
 
         print("Metrics on training dataset:")
         pprint.pprint(metrics)
+
+
+        if args.show_dvc_add_command:
+            print()
+            print()
+            print("Please copy paste the items below AFTER your")
+            print("    dvc run -n STAGE_NAME \\")
+            print("command")
+            print()
+            cmdline = f"  -d {sys.argv[0]} \\\n"
+            cmdline += f"  -d {args.train_input_file} \\\n"
+            cmdline += f"  -d {os.path.relpath(fit_model.__globals__['__file__'], '.')} \\\n"
+            cmdline += f"  \\\n"
+            cmdline += f"  -o {args.model_output_file} \\\n"
+            cmdline += f"  \\\n"
+            if args.metrics_output_file:
+                cmdline += f"  -M {args.metrics_output_file} \\\n"
+            
+            all_args = [x for x in sys.argv if x != "--show-dvc-add-command"]
+            all_args = map(lambda x: f"\\\n    {x}" if x[0] == "-" else x, all_args)
+
+
+            cmdline += "  python " + " ".join(all_args) 
+            
+
+            print(cmdline)
+            print()
+            print()
+
+
+
+
     else:
         print("Not supposed to happen....")
         sys.exit(1)
