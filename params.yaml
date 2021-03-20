@@ -16,7 +16,7 @@ model:
       numerical_impute_strategy: "median"
       categorical_impute_strategy: "most_frequent"
 
-  xgboost_model_1:
+  xgboost_model:
     features:
     - Age
     - Pclass
