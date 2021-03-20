@@ -60,3 +60,14 @@ stages:
     metrics:
     - metrics/xgboost_model/train.json:
         cache: false
+  evaluate_xgboost_model:
+    cmd: python dvc_scripts/xgboost_model.py --evaluate-test-set models/xgboost_model/model.pkl
+      ./data/train_test_split/test.pkl --metrics-output-file metrics/xgboost_model/test.json
+    deps:
+    - ./data/train_test_split/test.pkl
+    - dvc_scripts/xgboost_model.py
+    - models/xgboost_model/model.pkl
+    - src/models/xgboost_model.py
+    metrics:
+    - metrics/xgboost_model/test.json:
+        cache: false

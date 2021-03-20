@@ -139,3 +139,23 @@ stages:
     - path: metrics/xgboost_model/train.json
       md5: 23214835dcbe853ac1686015422a0b49
       size: 134
+  evaluate_xgboost_model:
+    cmd: python dvc_scripts/xgboost_model.py --evaluate-test-set models/xgboost_model/model.pkl
+      ./data/train_test_split/test.pkl --metrics-output-file metrics/xgboost_model/test.json
+    deps:
+    - path: ./data/train_test_split/test.pkl
+      md5: 918a7af7499c0303c9baf2362fde4a43
+      size: 22996
+    - path: dvc_scripts/xgboost_model.py
+      md5: 6d0993cafede3b69c2a28737b2ca3084
+      size: 6628
+    - path: models/xgboost_model/model.pkl
+      md5: 4619c72120f7c70824f4f00fc2d692d6
+      size: 71133
+    - path: src/models/xgboost_model.py
+      md5: 5f9ba36c5d337394ba04a465de02fffe
+      size: 2213
+    outs:
+    - path: metrics/xgboost_model/test.json
+      md5: 83a6fabbd0c88243ea19213cc9207d23
+      size: 144
