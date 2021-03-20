@@ -38,9 +38,8 @@ stages:
     - ./metrics/basic_logistic_regression/train.json:
         cache: false
   evaluate_basic_logistic_regression:
-    cmd: python ./dvc_scripts/basic_logistic_regression.py --evaluate-test-set
-      ./models/basic_logistic_regression/model.pkl ./data/train_test_split/test.pkl --metrics-output-file
-      metrics/basic_logistic_regression/test.json
+    cmd: python ./dvc_scripts/basic_logistic_regression.py --evaluate-test-set ./models/basic_logistic_regression/model.pkl
+      ./data/train_test_split/test.pkl --metrics-output-file metrics/basic_logistic_regression/test.json
     deps:
     - ./data/train_test_split/test.pkl
     - ./dvc_scripts/basic_logistic_regression.py
