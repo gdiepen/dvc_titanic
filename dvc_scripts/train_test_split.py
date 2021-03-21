@@ -49,32 +49,8 @@ def main():
         required=True,
         help="Name of the test output file",
     )
-    parser.add_argument(
-        "--random-state",
-        metavar="state",
-        type=int,
-        help="Random State to initialize with",
-    )
-    parser.add_argument(
-        "--test-size",
-        metavar="percentage",
-        type=float,
-        help="Percentage to assign to test set",
-    )
 
     args = parser.parse_args()
-
-    if args.random_state is not None:
-        print(f"Overruling random state with {args.random_state}")
-        random_state = args.random_state
-
-    if args.test_size is not None:
-        print(f"Overruling test_size with {args.test_size}")
-        test_size = args.test_size
-
-    if (test_size is None) or (random_state is None):
-        print("ERROR: random_state or test_size missing")
-        sys.exit(1)
 
     df = pd.read_pickle(args.raw_input_file)
     df_train, df_test = split_input_into_train_test(df, random_state, test_size)
